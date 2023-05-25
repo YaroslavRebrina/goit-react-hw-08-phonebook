@@ -34,5 +34,3 @@ export const {
   useAddContactMutation,
   useDeleteContactMutation,
 } = contactsApi;
-// export const { addContact, deleteContact } = contactsSlice.actions;
-// export const contactReducer = contactsSlice.reducer;

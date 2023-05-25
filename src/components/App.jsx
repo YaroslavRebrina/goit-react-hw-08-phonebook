@@ -7,23 +7,27 @@ import { Error } from './ContactsWidget/Error/Error';
 import css from './App.module.css';
 import { useGetContactsQuery } from 'store/contacts/contactsApi';
 import { Audio } from 'react-loader-spinner';
+import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   // const getContacts = useSelector(state => state.contacts.items);
   const { data, error, isLoading } = useGetContactsQuery();
 
   return (
-    <div className={css.global__wrapper}>
-      <ContactsForm />
-      <Filter />
-      <ul className={css.itemList}>
-        {error && <Error message={error.message} />}
-        {isLoading && <Audio />}
-        {data &&
-          data.map(({ id, name, phone }) => (
-            <ContactItem key={id} id={id} name={name} number={phone} />
-          ))}
-      </ul>
-    </div>
+    <Routes>
+      <Route path="/" element={'loginPage'}></Route>
+    </Routes>
+    // <div className={css.global__wrapper}>
+    //   <ContactsForm />
+    //   <Filter />
+    //   <ul className={css.itemList}>
+    //     {error && <Error message={error.message} />}
+    //     {isLoading && <Audio />}
+    //     {data &&
+    //       data.map(({ id, name, phone }) => (
+    //         <ContactItem key={id} id={id} name={name} number={phone} />
+    //       ))}
+    //   </ul>
+    // </div>
   );
 };
