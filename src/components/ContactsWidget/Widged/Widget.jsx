@@ -26,8 +26,8 @@ export const Widget = () => {
             {isLoading && <Audio />}
 
             {data &&
-              data.map(({ id, name, phone }) => (
-                <ContactItem key={id} id={id} name={name} number={phone} />
+              data.map(({ id, name, number }) => (
+                <ContactItem key={id} id={id} name={name} number={number} />
               ))}
           </ul>
         </div>

@@ -12,7 +12,7 @@ import css from './ContactsForm.module.css';
 
 export const ContactsForm = () => {
   const [name, setName] = useState('');
-  const [phone, setphone] = useState('');
+  const [number, setNumber] = useState('');
   const [addContact, { isLoading }] = useAddContactMutation();
   const { data } = useGetContactsQuery();
 
@@ -21,8 +21,8 @@ export const ContactsForm = () => {
       case 'name':
         setName(e.target.value);
         break;
-      case 'phone':
-        setphone(e.target.value);
+      case 'number':
+        setNumber(e.target.value);
         break;
       default:
         break;
@@ -37,7 +37,7 @@ export const ContactsForm = () => {
     });
 
     if (isNameAlreadyTaken.length === 0) {
-      addContact({ name, phone });
+      addContact({ name, number });
       reset();
       return;
     }
@@ -47,11 +47,11 @@ export const ContactsForm = () => {
 
   const reset = () => {
     setName('');
-    setphone('');
+    setNumber('');
   };
 
   const nameId = nanoid();
-  const phoneId = nanoid();
+  const numberId = nanoid();
 
   return (
     <>
@@ -70,22 +70,22 @@ export const ContactsForm = () => {
               value={name}
               id={nameId}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Casphonemore d'Artagnan"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Casnumbermore d'Artagnan"
               required
             />
           </label>
 
-          <label htmlFor={phoneId}>
+          <label htmlFor={numberId}>
             <input
               className={css.input}
               onChange={handlerInput}
               placeholder="tel"
               type="tel"
-              name="phone"
-              value={phone}
-              id={phoneId}
+              name="number"
+              value={number}
+              id={numberId}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
           </label>
