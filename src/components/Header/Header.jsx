@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { userLogout } from 'store/auth/operations';
-import {
-  selectIsLoading,
-  selectIsLoggedIn,
-  selectName,
-} from 'store/auth/selectors';
+import { selectIsLoggedIn, selectName } from 'store/auth/selectors';
 import { DiReact } from 'react-icons/di';
 import css from './Header.module.css';
 
