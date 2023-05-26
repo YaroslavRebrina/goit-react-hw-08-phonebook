@@ -12,7 +12,6 @@ import css from './Header.module.css';
 export const Header = () => {
   const isUserLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectName);
-  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
