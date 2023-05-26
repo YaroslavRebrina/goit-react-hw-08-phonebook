@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userSignup, userLogin, userLogout } from './operations';
+import { userSignup, userLogin, userLogout, userRefresh } from './operations';
+import storage from 'redux-persist/lib/storage';
+import persistReducer from 'redux-persist/es/persistReducer';
 
 const initialState = {
   user: { name: null, email: null },
+
   JWT: null,
   isLoggedIn: false,
   isLoading: false,
@@ -50,10 +53,28 @@ export const authSlice = createSlice({
       state.isLoading = false;
     },
     [userLogout.rejected](state, action) {
-      console.log(action.payload.message);
+      state.isLoading = false;
+    },
+    [userRefresh.pending](state) {
+      state.isLoading = true;
+    },
+    [userRefresh.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+      state.isLoading = false;
+    },
+    [userRefresh.rejected](state) {
       state.isLoading = false;
     },
   },
 });
 
-export const authReducer = authSlice.reducer;
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['JWT'],
+};
+export const persistedAuthReducer = persistReducer(
+  persistConfig,
+  authSlice.reducer
+);
