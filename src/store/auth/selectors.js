@@ -1,5 +1,5 @@
-export const selectName = state => state.name;
+export const selectName = state => state.auth.user.name;
 
-export const selectJWT = state => state.JWT;
+export const selectJWT = state => state.auth.JWT;
 
-export const selectIsLoggedIn = state => state.isLoggedIn;
+export const selectIsLoggedIn = state => state.auth.isLoggedIn;

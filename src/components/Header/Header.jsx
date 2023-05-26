@@ -4,6 +4,7 @@ import { selectIsLoggedIn, selectName } from 'store/auth/selectors';
 
 export const Header = () => {
   const isUserLoggedIn = useSelector(selectIsLoggedIn);
+
   const userName = useSelector(selectName);
 
   return (
