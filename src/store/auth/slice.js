@@ -15,9 +15,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
-    [userSignup.pending](state) {
-      state.isLoading = true;
-    },
     [userSignup.fulfilled](state, action) {
       console.log(action);
       state.user = action.payload.user;
@@ -25,25 +22,11 @@ export const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoading = false;
     },
-    [userSignup.rejected](state, action) {
-      console.log(action.payload.message);
-      state.isLoading = false;
-    },
-    [userLogin.pending](state) {
-      state.isLoading = true;
-    },
     [userLogin.fulfilled](state, action) {
       state.user = action.payload.user;
       state.JWT = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
-    },
-    [userLogin.rejected](state, action) {
-      console.log(action.payload.message);
-      state.isLoading = false;
-    },
-    [userLogout.pending](state) {
-      state.isLoading = true;
     },
     [userLogout.fulfilled](state, action) {
       console.log(action);
@@ -52,15 +35,30 @@ export const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoading = false;
     },
-    [userLogout.rejected](state, action) {
+    [userRefresh.fulfilled](state, action) {
+      state.user = action.payload;
+      state.isLoggedIn = true;
       state.isLoading = false;
+    },
+    [userSignup.pending](state) {
+      state.isLoading = true;
+    },
+    [userLogin.pending](state) {
+      state.isLoading = true;
+    },
+    [userLogout.pending](state) {
+      state.isLoading = true;
     },
     [userRefresh.pending](state) {
       state.isLoading = true;
     },
-    [userRefresh.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
+    [userSignup.rejected](state, action) {
+      state.isLoading = false;
+    },
+    [userLogin.rejected](state, action) {
+      state.isLoading = false;
+    },
+    [userLogout.rejected](state, action) {
       state.isLoading = false;
     },
     [userRefresh.rejected](state) {

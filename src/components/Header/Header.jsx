@@ -1,30 +1,45 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { userLogout } from 'store/auth/operations';
-import { selectIsLoggedIn, selectName } from 'store/auth/selectors';
+import {
+  selectIsLoading,
+  selectIsLoggedIn,
+  selectName,
+} from 'store/auth/selectors';
+import { DiReact } from 'react-icons/di';
+import css from './Header.module.css';
 
 export const Header = () => {
   const isUserLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectName);
+  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
   return (
     <>
-      <header>
-        <nav>
-          {isUserLoggedIn ? (
-            <>
-              <div>Welcome {userName}</div>
-              <button type="button" onClick={() => dispatch(userLogout())}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link to="login">Log in</Link>
-          )}
-        </nav>
-      </header>
+      <section className={css.sectionHeader}>
+        <header className={css.header}>
+          <nav className={css.nav}>
+            {isUserLoggedIn ? (
+              <>
+                <div>
+                  Welcome <span className={css.username}>{userName}</span>
+                </div>
+                <button
+                  type="button"
+                  className={css.buttonLogout}
+                  onClick={() => dispatch(userLogout())}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <DiReact size="40px" />
+            )}
+          </nav>
+        </header>
+      </section>
       <Outlet />
     </>
   );

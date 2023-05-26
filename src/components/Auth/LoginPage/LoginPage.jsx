@@ -3,12 +3,14 @@ import { userLogin } from 'store/auth/operations';
 import { useState } from 'react';
 import css from '../AuthForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'store/auth/selectors';
+import { selectIsLoading, selectIsLoggedIn } from 'store/auth/selectors';
+import { Audio } from 'react-loader-spinner';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isUserLoggedin = useSelector(selectIsLoggedIn);
+  const isLoading = useSelector(selectIsLoading);
 
   const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ export const LoginPage = () => {
     <>
       {isUserLoggedin ? (
         <Navigate to="/contacts" />
-      ) : (
+      ) : isLoading === false ? (
         <div className={css.authPageWrapper}>
           <form className={css.authForm} onSubmit={e => handleSubmit(e)}>
             <div>
@@ -53,11 +55,13 @@ export const LoginPage = () => {
               />
             </div>
 
-            <button type="submit">Log In</button>
+            <button type="submit" className={css.authButton}>Log In</button>
           </form>
 
           <Link to="/registration">Don`t have an accaount yet?</Link>
         </div>
+      ) : (
+        <Audio />
       )}
     </>
   );

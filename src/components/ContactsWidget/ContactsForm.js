@@ -89,7 +89,9 @@ export const ContactsForm = () => {
               required
             />
           </label>
-          <button type="submit">Add phone number</button>
+          <button type="submit" className={css.addNumber}>
+            Add phone number
+          </button>
         </form>
       )}
     </>

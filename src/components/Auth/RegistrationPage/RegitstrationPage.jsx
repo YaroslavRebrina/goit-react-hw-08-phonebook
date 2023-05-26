@@ -69,7 +69,9 @@ export const RegisterationPage = () => {
                 />
               </div>
 
-              <button type="submit">Register</button>
+              <button type="submit" className={css.authButton}>
+                Register
+              </button>
             </form>
           </div>
 

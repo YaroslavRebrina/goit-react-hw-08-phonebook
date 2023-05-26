@@ -20,11 +20,9 @@ export const Widget = () => {
         <div className={css.global__wrapper}>
           <ContactsForm />
           <Filter />
-
           <ul className={css.itemList}>
             {error && <Error message={error.message} />}
             {isLoading && <Audio />}
-
             {data &&
               data.map(({ id, name, number }) => (
                 <ContactItem key={id} id={id} name={name} number={number} />

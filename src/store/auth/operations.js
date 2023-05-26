@@ -57,10 +57,9 @@ export const userRefresh = createAsyncThunk(
     const persistedToken = state.auth.JWT;
 
     if (persistedToken === null) {
-      console.log('уходим');
       return thunkAPI.rejectWithValue();
     }
-    console.log('делаем');
+
     token.set(persistedToken);
     try {
       const { data } = await axios.get('/users/current');

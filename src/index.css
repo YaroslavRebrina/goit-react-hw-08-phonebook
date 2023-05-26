@@ -21,3 +21,9 @@ li {
 button {
   cursor: pointer;
 }
+
+input {
+  border: 1px bisque solid;
+  border-radius: 6px;
+  padding: 8px;
+}
